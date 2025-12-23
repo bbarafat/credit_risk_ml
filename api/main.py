@@ -3,6 +3,7 @@ import json
 import joblib
 import pandas as pd
 from fastapi import FastAPI
+import numpy as np
 
 from api.schema import CreditApplication, PredictionResponse
 from src.metrics import predict_with_threshold
@@ -40,7 +41,7 @@ def predict(application: CreditApplication):
 
     # Predict
     prob = float(model.predict_proba(df)[:, 1][0])
-    pred = int(predict_with_threshold([prob], threshold)[0])
+    pred = int(predict_with_threshold(np.array([prob]), threshold)[0])
 
     return PredictionResponse(
         default_probability=prob,
