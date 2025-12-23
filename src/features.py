@@ -32,7 +32,7 @@ def build_preprocessor(
     return ColumnTransformer(
         transformers=[
             ("num", StandardScaler(), continuous_features),
-            ("cat", OneHotEncoder(drop="if_binary", handle_unknown="ignore"), categorical_features),
+            ("cat", OneHotEncoder(drop="if_binary", handle_unknown="ignore",sparse_output=False), categorical_features),
             ("pay", pay_enc, pay_cols),
             ("edu", education_enc, education_cols),
             ("mar", marital_enc, marital_cols),
