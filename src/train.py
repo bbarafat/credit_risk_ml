@@ -37,7 +37,11 @@ def main(input_csv: str, model_dir: str):
     )
 
     from sklearn.ensemble import HistGradientBoostingClassifier
-    estimator = HistGradientBoostingClassifier(max_iter=1000, random_state=42)
+    estimator = HistGradientBoostingClassifier(
+        max_depth=6,
+        learning_rate=0.05,
+        max_iter=300,
+        random_state=RANDOM_STATE)
 
     pipeline = Pipeline([("preprocess", preprocessor), ("model", estimator)])
 
